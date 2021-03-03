@@ -5,7 +5,7 @@
 
         <div class="w-1/2 pl-2 md:pl-0">
             <a class="text-gray-900 text-base xl:text-xl no-underline hover:no-underline font-bold" href="#">
-                <i class="fas fa-sun text-pink-600 pr-3"></i> Admin Day Mode
+                Admin
             </a>
         </div>
         <div class="w-1/2 pr-0">
@@ -13,21 +13,28 @@
 
                 <div class="relative text-sm">
                     <button id="userButton" class="flex items-center focus:outline-none mr-3">
-                        <img class="w-8 h-8 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of User"> <span class="hidden md:inline-block">Hi, User </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
-                            <path fill="#fff" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                          </svg>
+                        <img class="w-8 h-8 rounded-full mr-4" src="{{asset('img/logo.png')}}" alt="Avatar of User"> 
+                        <span class="hidden md:inline-block">Hi, Admin </span>
+                         
                     </button>
                     <div id="userMenu" class="bg-white rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30 invisible">
                         <ul class="list-reset">
-                            <li><a href="#" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">My account</a></li>
-                            <li><a href="#" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Notifications</a></li>
+                            {{-- <li><a href="#" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">My account</a></li>
+                            <li><a href="#" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Notifications</a></li> --}}
                             <li>
                                 <hr class="border-t mx-2 border-gray-400">
                             </li>
-                            <li><a href="#" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Logout</a></li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline"
+                           onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            {{ csrf_field() }}
+                        </form>
+
+
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -49,30 +56,18 @@
         <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white z-20" id="nav-content">
             <ul class="list-reset lg:flex flex-1 items-center px-4 md:px-0">
                 <li class="mr-6 my-2 md:my-0">
-                    <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-pink-600 no-underline hover:text-gray-900 border-b-2 border-orange-600 hover:border-orange-600">
-                        <i class="fas fa-home fa-fw mr-3 text-pink-600"></i><span class="pb-1 md:pb-0 text-sm">Home</span>
+                    <a href="{{route('home')}}" class="block py-1 md:py-3 pl-1 align-middle no-underline hover:text-gray-900 {{\Request::route()->getName() == 'home' ? ' text-pink-600 ': ''}}">
+                        <span class="pb-1 md:pb-0 text-sm">Home</span>
                     </a>
                 </li>
                 <li class="mr-6 my-2 md:my-0">
-                    <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-pink-500">
-                        <i class="fas fa-tasks fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Tasks</span>
+                    <a href="{{route('category.index')}}" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-white  hover:border-pink-500 {{\Request::route()->getName() == 'category.index' ? ' text-pink-600': ''}}">
+                    <span class="pb-1 md:pb-0 text-sm">Category </span>
                     </a>
                 </li>
-                <li class="mr-6 my-2 md:my-0">
-                    <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-purple-500">
-                        <i class="fa fa-envelope fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Messages</span>
-                    </a>
-                </li>
-                <li class="mr-6 my-2 md:my-0">
-                    <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-green-500">
-                        <i class="fas fa-chart-area fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Analytics</span>
-                    </a>
-                </li>
-                <li class="mr-6 my-2 md:my-0">
-                    <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-red-500">
-                        <i class="fa fa-wallet fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Payments</span>
-                    </a>
-                </li>
+                
+                
+                
             </ul>
 
             <div class="relative pull-right pl-4 pr-4 md:pr-0">

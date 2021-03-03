@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('parant_id')->nullable();
             $table->string('name');
             $table->string('slug');
+            $table->integer('order')->default(0);
             $table->timestamps();
 
             $table->foreign('parant_id')
