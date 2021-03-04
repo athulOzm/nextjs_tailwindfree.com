@@ -26,13 +26,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence(50);
+        $title = $this->faker->sentence(7);
         return [
             'user_id'   =>  $this->faker->randomElement(\App\Models\User::all()->pluck('id')->toArray()),
             'title' =>  $title,
             'slug'  =>  Str::slug($title, '-'),
             'body'  =>  $this->faker->text(400),
-            'code'  =>  $this->faker->text(400),
+            'html'  =>  '<h1>am component</h1>',
              
         ];
     }

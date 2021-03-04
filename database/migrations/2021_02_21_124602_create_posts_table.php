@@ -19,7 +19,10 @@ class CreatePostsTable extends Migration
             $table->text('slug');
             $table->mediumText('title');
             $table->longText('body');
-            $table->longText('code')->nullable();
+            $table->longText('html')->nullable();
+            $table->longText('react')->nullable();
+            $table->longText('vue')->nullable();
+            $table->longText('next')->nullable();
             $table->string('img')->nullable();
             $table->timestamps();
         });

@@ -1,3 +1,6 @@
+<?php 
+$categories = resolve('categories');
+?>
 <x-App>
 
 
@@ -10,58 +13,7 @@
 
            
 
-            <div class="flex flex-row flex-wrap flex-grow mt-2">
-
-                    
-                <div class="w-full  md:w-1/2 p-3">
-                    <!--Table Card-->
-                    <div class="bg-white border rounded shadow">
-                        <div class="border-b p-3">
-                            <h5 class="font-bold uppercase text-gray-600">Categories</h5>
-                        </div>
-                        <div class="p-5">
-                            <table class="w-full p-5 text-gray-700">
-                                <thead>
-                                    <tr>
-                                        <th class="text-left text-blue-900">Order</th>
-                                        <th class="text-left text-blue-900">Name</th>
-                                        <th class="text-left text-blue-900">Parant</th>
-                                        <th class="text-left text-blue-900">drop</th>
-
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @forelse ($categories as $category)
-                                    <tr>
-                                        <td>{{$category->order}}</td>
-                                        <td>{{$category->name}}</td>
-                                        <td>{{$category->parant_id}}</td>
-                                        
-                                        <td> <button onclick="document.getElementById({{$category->id}}).submit();">remove</button> 
-                                            <form id="{{$category->id}}" method="POST" action="{{ route('category.delete') }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="hidden" name="id" value="{{$category->id}}">
-                                            </form>
-                                        
-                                        </td>
-
-                                    </tr>
-                                    @empty
-                                        <tr><td>No found</td></tr>
-                                    @endforelse
- 
-                                    
-                                 
-                                </tbody>
-                            </table>
- 
-                        </div>
-                    </div>
-                    <!--/table Card-->
-                </div>
-
+            
 
 
 
@@ -73,8 +25,9 @@
                             <h5 class="font-bold uppercase text-gray-600">Add</h5>
                         </div>
                         <div class="p-5">
-                            <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('category.store') }}">
+                            <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('post.store') }}">
                                 @csrf
+                                
             
                                 <div class="flex flex-wrap">
                                     <label for="name" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">

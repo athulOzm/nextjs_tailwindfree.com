@@ -7,4 +7,7 @@
         @apply w-full select-none font-bold p-3 rounded-lg text-base leading-normal 
         no-underline text-gray-100 bg-blue-500 hover:bg-blue-700
     }
+    .inputtext{
+        @apply bg-gray-300 w-full border-gray-100 p-2
+    }
 }
