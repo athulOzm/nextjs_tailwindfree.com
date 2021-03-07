@@ -1,11 +1,8 @@
+
+<?php
+$categories = resolve('allCategories');
+?>
 <x-App>
-
- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>  
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script> 
-
-
     <!--Container-->
     <div class="container w-full mx-auto pt-20">
 
@@ -31,22 +28,10 @@
                             <h5 class="font-bold uppercase text-gray-600">Add</h5>
                         </div>
                         <div class="p-3">
-                            <form class="w-full px-3 space-y-3 sm:px-10 sm:space-y-4" method="POST" action="{{ route('post.store') }}">
+                            <form class="w-full px-3 space-y-3 sm:px-10 sm:space-y-4" enctype="multipart/form-data" method="POST" action="{{ route('post.store') }}">
                                 @csrf
 
-
-                                <div class="flex flex-wrap">
-                                    <label for="parant" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
-                                        Parant:
-                                    </label>
-                                    <select class="inputtext form-input " name="parant">
-                                        <option value="">Main</option>
-                                        @foreach ($categories as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                
+ 
             
                                 <div class="flex flex-wrap">
                                     <label for="name" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
@@ -78,18 +63,92 @@
                                         @enderror
                                 </div>
 
-                                
+                                <div class="flex flex-wrap">
+                                    <label for=html" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
+                                        Html:
+                                    </label>
+                                    <textarea id="html"  rows="3"
+                                        class="summernote inputtext form-input @error('html') border-red-500 @enderror" name="html"
+                                        value="{{ old('title') }}" required  autofocus> </textarea>
+            
+                                        @error('html')
+                                        <p class="text-red-500 text-xs italic mt-4">
+                                            {{ $message }}
+                                        </p>
+                                        @enderror
+                                </div>
+
+                                <div class="flex flex-wrap">
+                                    <label for="react" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
+                                        React:
+                                    </label>
+                                    <textarea id="react"  rows="3"
+                                        class="summernote inputtext form-input @error('react') border-red-500 @enderror" name="react"
+                                        value="{{ old('react') }}" required  autofocus> </textarea>
+            
+                                        @error('react')
+                                        <p class="text-red-500 text-xs italic mt-4">
+                                            {{ $message }}
+                                        </p>
+                                        @enderror
+                                </div>
+
+                                <div class="flex flex-wrap">
+                                    <label for="vue" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
+                                        Vue:
+                                    </label>
+                                    <textarea id="vue"  rows="3"
+                                        class="summernote inputtext form-input @error('vue') border-red-500 @enderror" name="vue"
+                                        value="{{ old('vue') }}" required  autofocus> </textarea>
+            
+                                        @error('vue')
+                                        <p class="text-red-500 text-xs italic mt-4">
+                                            {{ $message }}
+                                        </p>
+                                        @enderror
+                                </div>
 
 
                                 <div class="flex flex-wrap">
-                                    <label for="order" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
-                                        Order:
+                                    <label for="cover" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
+                                        Cover:
                                     </label>
-                                    <input id="order" type="number"
-                                        class="inputtext form-input  @error('name') border-red-500 @enderror" name="order"
-                                        value="0" required  autofocus>
-             
+                                    <input type="file" name="cover" id="">
+            
+                                        @error('cover')
+                                        <p class="text-red-500 text-xs italic mt-4">
+                                            {{ $message }}
+                                        </p>
+                                        @enderror
                                 </div>
+
+
+                                <div class="flex flex-wrap">
+                                    <label for="cat" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 w-full">
+                                        Category:
+                                    </label>
+
+
+
+                                    <label class="flex flex-col items-center mt-3">
+
+                                        @foreach($categories as $cat)
+                                        <div>
+                                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" value="{{$cat->id}}" name="cat[]">
+                                            <span class="ml-2 text-gray-700">{{$cat->name}}</span>
+                                        </div>
+                                        @endforeach
+
+                                        
+                                    </label>
+                                    
+                                     
+                                </div>
+
+ 
+
+                                
+ 
 
                                 
                                 <button type="submit"  

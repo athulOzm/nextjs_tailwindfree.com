@@ -31,4 +31,9 @@ class CategoryController extends Controller
         Category::find($request->id)->delete();
         return redirect(route('category.index'));
     }
+
+    public function getAll(Category $category){
+
+        return response($category->with('posts')->get(), 200);
+    }
 }

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
+ 
 class PostController extends Controller
 {
     /**
@@ -36,7 +37,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('cover')):
+            $imgname = $request->cover->store('/');
+        endif;
+
+        $post = auth()->user()->posts()->create([
+            'slug'  =>  Str::slug($request->title, '-'),
+            'title' =>  $request->title,
+            'body'  =>  $request->body,
+            'html'  =>  $request->html,
+            'react' =>  $request->react,
+            'vue'   =>  $request->vue,
+            'img'   =>  $imgname ? $imgname : null
+        ]);
+
+        $post->categories()->attach($request->cat);
+
+
+        return back();
     }
 
     /**
@@ -83,5 +101,11 @@ class PostController extends Controller
     {
         Post::find($request->id)->delete();
         return back();
+    }
+
+
+    public function getAll(Post $post){
+
+        return response($post->with('categories')->latest()->get(), 200);
     }
 }
