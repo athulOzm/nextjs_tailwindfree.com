@@ -36,4 +36,10 @@ class CategoryController extends Controller
 
         return response($category->with('posts')->get(), 200);
     }
+
+    public function getPosts($category){
+
+        $category = Category::where('slug', $category)->first();
+        return response($category->posts, 200);
+    }
 }

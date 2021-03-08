@@ -103,9 +103,24 @@ class PostController extends Controller
         return back();
     }
 
+    //API --------------------------------------------------------------
 
     public function getAll(Post $post){
 
-        return response($post->with('categories')->latest()->get(), 200);
+        return response($post->
+            with('categories')
+            ->latest()
+            ->get(), 200);
+    }
+
+    public function getOne($post){
+
+        $post = Post::find($post);
+
+        if($post != null): 
+            return response($post, 200);
+        else: 
+            return response(['error' => 'not found'], 404);
+        endif;
     }
 }

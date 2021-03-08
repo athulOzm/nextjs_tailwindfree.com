@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 
 
@@ -37,6 +37,6 @@ Route::middleware(['auth:web'])->group(function () {
      Route::post('/post', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
      Route::delete('/post/drop', [App\Http\Controllers\PostController::class, 'delete'])->name('post.delete');
      Route::get('/post/edit/{post}', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
-
-
 });
+
+
