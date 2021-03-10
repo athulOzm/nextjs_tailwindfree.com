@@ -38,7 +38,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         if($request->hasFile('cover')):
-            $imgname = $request->cover->store('/');
+            $imgname = $request->cover->store('/public/cover');
         endif;
 
         $post = auth()->user()->posts()->create([
