@@ -38,7 +38,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         if($request->hasFile('cover')):
-            $imgname = $request->cover->store('/public/cover');
+            $fname = Str::slug($request->title, '-').rand(100,999).'.'.$request->file('cover')->extension();
+            $imgname = $request->cover->storeAs('cover', $fname);
         endif;
 
         $post = auth()->user()->posts()->create([
@@ -48,7 +49,7 @@ class PostController extends Controller
             'html'  =>  $request->html,
             'react' =>  $request->react,
             'vue'   =>  $request->vue,
-            'img'   =>  $imgname ? $imgname : null
+            'img'   =>  @$fname ? $fname : null
         ]);
 
         $post->categories()->attach($request->cat);
