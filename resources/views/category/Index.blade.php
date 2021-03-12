@@ -1,5 +1,6 @@
 <x-App>
 
+   
 
     <!--Container-->
     <div class="container w-full mx-auto pt-20">
@@ -36,7 +37,11 @@
                                     <tr>
                                         <td>{{$category->order}}</td>
                                         <td>{{$category->name}}</td>
-                                        <td>{{$category->parant_id}}</td>
+                                        <td>
+                                            @if ($category->parant()->exists())
+                                                {{$category->parant->name}}
+                                            @endif
+                                            </td>
                                         
                                         <td> <button onclick="document.getElementById({{$category->id}}).submit();">remove</button> 
                                             <form id="{{$category->id}}" method="POST" action="{{ route('category.delete') }}">

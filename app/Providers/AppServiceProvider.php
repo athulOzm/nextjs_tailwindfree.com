@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind('allCategories', function(){
 
-            return Category::where('parant_id', null)->get();
+            return Category::get();
         });
     }
 

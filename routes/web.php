@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Auth::routes(['register' => false]);
+Auth::routes();
 
 
 

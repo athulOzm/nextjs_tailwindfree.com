@@ -116,7 +116,7 @@ class PostController extends Controller
 
     public function getOne($post){
 
-        $post = Post::find($post);
+        $post = Post::where('slug', $post)->first();
 
         if($post != null): 
             return response($post, 200);

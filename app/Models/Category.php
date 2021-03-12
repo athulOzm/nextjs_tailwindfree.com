@@ -16,6 +16,15 @@ class Category extends Model
         return $this->belongsToMany(Post::class)->withTimestamps();
     }
 
+    public function parant(){
+
+        return $this->belongsTo(Category::class, 'parant_id');
+    }
+    public function childs(){
+
+        return $this->hasMany(Category::class, 'parant_id');
+    }
+
     
  
 }
