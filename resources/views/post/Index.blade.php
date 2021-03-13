@@ -122,6 +122,19 @@ $categories = resolve('allCategories');
                                         @enderror
                                 </div>
 
+                                <div class="flex flex-wrap">
+                                    <label for="cover" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 ">
+                                        File download:
+                                    </label>
+                                    <input type="file" name="download" id="">
+            
+                                        @error('download')
+                                        <p class="text-red-500 text-xs italic mt-4">
+                                            {{ $message }}
+                                        </p>
+                                        @enderror
+                                </div>
+
 
                                 <div class="flex flex-wrap">
                                     <label for="cat" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4 w-full">

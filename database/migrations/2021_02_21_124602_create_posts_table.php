@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration
             $table->longText('vue')->nullable();
             $table->longText('next')->nullable();
             $table->string('img')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
