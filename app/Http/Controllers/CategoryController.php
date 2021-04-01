@@ -42,7 +42,7 @@ class CategoryController extends Controller
 
         if($category == 'all'): 
 
-            return response(Post::latest()->get(), 200);
+            return response(Post::with('categories')->latest()->get(), 200);
         else: 
 
             $category = Category::where('slug', $category)->first();
